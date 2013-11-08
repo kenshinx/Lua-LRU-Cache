@@ -1,4 +1,25 @@
---LRU implement in lua
+--[[--
+LRU implement in lua
+
+local lrucache = require "lru"
+local lru = lrucache:new(max_size=2,expire=3)
+
+local function sleep(n)
+	os.execute("sleep " .. tonumber(n))  
+end
+
+lru:set("x","a")
+time.sleep(3)
+lru:set("y","b")
+lru:set("z","c")
+lru:set("w","d")
+
+lru.get("x") -- return nil, expired
+lru.get("y") -- return nil, reach max count
+lru.get("z") -- return c
+
+
+]]
 
 local LRUCache = {max_size=10000,expire=60*60}
 
